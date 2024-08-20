@@ -11,9 +11,10 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      get "/legal" => "cars#legal"
+      get "/illegal" => "cars#illegal"
+      post "/search" => "cars#search"
       resources :cars do
-        get "/legal" => "cars#legal"
-        get "/illegal" => "cars#illegal"
         resources :modifications, only: [ :index, :show, :create ]
       end
     end

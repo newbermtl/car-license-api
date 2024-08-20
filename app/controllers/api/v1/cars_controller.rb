@@ -27,6 +27,18 @@ module Api
         render json: cars
       end
 
+      def search
+        col_to_search = params[:col]
+        query = params[:query]
+
+        cars = Car.where(col_to_search.to_sym => query)
+        if !cars.empty?
+          render json: cars
+        else
+          render json: { "error": "No cars found" }
+        end
+      end
+
       # POST /cars or /cars.json
       def create
         car = Car.new(car_params)
